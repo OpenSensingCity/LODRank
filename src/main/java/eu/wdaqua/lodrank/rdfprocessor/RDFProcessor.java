@@ -5,9 +5,14 @@ package eu.wdaqua.lodrank.rdfprocessor;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collection;
+import java.util.*;
 import java.util.Map.Entry;
 
+import com.sun.org.apache.xpath.internal.SourceTree;
+import fr.opensensingcity.urlstructurevectorgeneration.Link.Link;
+import fr.opensensingcity.urlstructurevectorgeneration.Link.LinkFactory;
+import fr.opensensingcity.urlstructurevectorgeneration.Link.LinkLibrary;
+import fr.opensensingcity.urlstructurevectorgeneration.Link.Types;
 import org.apache.jena.graph.Triple;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.sparql.core.Quad;
@@ -126,20 +131,57 @@ public class RDFProcessor {
 		this.logger.debug("Extracting links from quads.");
 		this.linkWriter.open();
 		this.loader.open();
+
+		long counterRDFType = 0;
+		int numTriples = 0;
+		Map<String, List<Link>> linkTable = new HashMap<String, List<Link>>();
+
 		try {
 			while (this.loader.hasNext()) {
 				final Quad quad = (Quad) this.loader.next();
 				try {
 					this.logger.debug("Getting links for quad: " + quad.toString());
 					this.linkExtractor.setQuad(quad);
+
 					final Entry<String, Collection<String>> entry = this.linkExtractor.getLinks();
 					if (entry != null) {
 						this.linkWriter.addLinks(entry.getKey(), entry.getValue());
+						counterRDFType++;
+
+						Collection<String> links = entry.getValue();
+
+
+						String subjectIRI = links.iterator().next();
+						if (subjectIRI != null){
+							LinkLibrary.addLink(subjectIRI, Types.Role.Subject);
+						}
+
+						String predicateIRI = links.iterator().next();
+						if (predicateIRI != null){
+							LinkLibrary.addLink(predicateIRI, Types.Role.Predicate);
+						}
+
+						String objectIRI = links.iterator().next();
+						if (objectIRI != null){
+							LinkLibrary.addLink(objectIRI, Types.Role.Object);
+						}
 					}
 				} catch (final InvalidResourceException e) {
 					this.logger.debug("Invalid resource when reading Quad " + quad.toString());
 				}
+				if (numTriples++ > 100){
+					//LinkLibrary.serialize("/home/bakerally/Downloads/testlinks/");
+
+					System.out.println();
+					System.out.println("###########################Triples##################");
+					for (String key:linkTable.keySet()){
+						System.out.println(key+ " "+linkTable.get(key).size());
+					}
+					break;
+				}
 			}
+			LinkLibrary.serialize("/home/bakerally/Downloads/testlinks/");
+			System.out.println("RDF Type Triples:"+counterRDFType);
 		} catch (final Throwable t) {
 			this.logger.info("Catching throwable in the loop", t);
 		}
@@ -154,6 +196,19 @@ public class RDFProcessor {
 		} catch (final Throwable t) {
 			this.logger.info("Catching throwable after the loop", t);
 		}
+	}
+
+	Map<String, List<Link>> addToMap(Map<String, List<Link>> linkTable,Link link ){
+		if (!linkTable.containsKey(link.toString())){
+			List <Link> currentLinkTable = new ArrayList<>();
+			currentLinkTable.add(link);
+			linkTable.put(link.toString(),currentLinkTable);
+		} else {
+			List <Link> currentLinkTable = linkTable.get(link.toString());
+			currentLinkTable.add(link);
+			linkTable.put(link.toString(),currentLinkTable);
+		}
+		return linkTable;
 	}
 
 }

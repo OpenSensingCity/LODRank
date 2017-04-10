@@ -155,7 +155,7 @@ public class LODRank {
 	}
 
 	public void run() throws SourceNotOpenableException, DestinationNotOpenableException {
-
+		System.out.println();
 		this.logger.debug("Creating URLProcessor");
 		final URLProcessor urlProcessor;
 		if (getDictionaryFile() == null && getDictionaryURL() == null) {

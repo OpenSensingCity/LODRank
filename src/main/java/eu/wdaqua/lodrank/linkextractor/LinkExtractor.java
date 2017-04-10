@@ -2,17 +2,15 @@ package eu.wdaqua.lodrank.linkextractor;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.*;
 import java.util.AbstractMap.SimpleEntry;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
 import org.apache.jena.graph.Node;
 import org.apache.jena.graph.Triple;
 import org.apache.jena.sparql.core.Quad;
+import org.apache.jena.vocabulary.RDF;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -192,16 +190,31 @@ public class LinkExtractor {
 	 * @throws InvalidResourceException
 	 */
 	protected Collection<String> getLinksFromTriple(final Triple triple) throws InvalidResourceException {
-		Collection<String> links;
-		if (this.duplicates) {
+		List<String> links = new ArrayList<>();
+
+		/*if (this.duplicates) {
 			links = new LinkedList<>();
 		} else {
 			links = new HashSet<>();
-		}
+		}*/
 		if (getDataset() != null) {
-			links = addLinkIfNotNull(links, getLinkFromRole(Role.SUBJECT, triple));
+
+			/*links = addLinkIfNotNull(links, getLinkFromRole(Role.SUBJECT, triple));
 			links = addLinkIfNotNull(links, getLinkFromRole(Role.PREDICATE, triple));
-			links = addLinkIfNotNull(links, getLinkFromRole(Role.OBJECT, triple));
+			links = addLinkIfNotNull(links, getLinkFromRole(Role.OBJECT, triple));*/
+
+			String subjectIRI = triple.getSubject().toString();
+			String predicateIRI = triple.getPredicate().toString();
+			String objectIRI = triple.getObject().toString();
+
+			//System.out.println("Triple:"+subjectIRI+" "+predicateIRI+" "+objectIRI);
+
+			links.add(0,subjectIRI);
+			links.add(1,predicateIRI);
+			links.add(2,objectIRI);
+
+
+
 		} else {
 			this.logger.warn("Could not obtain dataset for triple. No links will be extracted.");
 		}
