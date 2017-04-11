@@ -155,7 +155,7 @@ public class RDFProcessor {
 
 						Collection<String> links = entry.getValue();
 
-						String subjectIRI = links.iterator().next();
+						/*String subjectIRI = links.iterator().next();
 						if (subjectIRI != null){
 
 						}
@@ -168,7 +168,7 @@ public class RDFProcessor {
 						String objectIRI = links.iterator().next();
 						if (objectIRI != null){
 
-						}
+						}*/
 					}
 				} catch (final InvalidResourceException e) {
 					this.logger.debug("Invalid resource when reading Quad " + quad.toString());
@@ -188,7 +188,7 @@ public class RDFProcessor {
 				}*/
 
 			}
-			LinkLibrary.serialize("../analysisfiles/");
+			//LinkLibrary.serialize("../analysisfiles/");
 			RepresentationAnalyser.serialize("../analysisfiles/");
 			System.out.println("RDF Type Triples:"+counterRDFType);
 			Utils.echoToFile(numTriples,"../analysisfiles/totalTriples");

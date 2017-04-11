@@ -38,4 +38,12 @@ public class RepresentationAnalyser {
         writer.close();
     }
 
+    public static String getString()  {
+        String line = "";
+        for (String cgi:rdfGraphs.keySet()){
+            line = line + rdfGraphs.get(cgi).serialize() + "\n";
+        }
+        return line;
+    }
+
 }
