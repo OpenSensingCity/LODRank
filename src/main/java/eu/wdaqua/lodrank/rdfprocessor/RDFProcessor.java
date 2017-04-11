@@ -2,7 +2,6 @@
  *
  */
 package eu.wdaqua.lodrank.rdfprocessor;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -153,24 +152,27 @@ public class RDFProcessor {
 
 						String subjectIRI = links.iterator().next();
 						if (subjectIRI != null){
-							LinkLibrary.addLink(subjectIRI, Types.Role.Subject);
+
 						}
 
 						String predicateIRI = links.iterator().next();
 						if (predicateIRI != null){
-							LinkLibrary.addLink(predicateIRI, Types.Role.Predicate);
+
 						}
 
 						String objectIRI = links.iterator().next();
 						if (objectIRI != null){
-							LinkLibrary.addLink(objectIRI, Types.Role.Object);
+
 						}
 					}
 				} catch (final InvalidResourceException e) {
 					this.logger.debug("Invalid resource when reading Quad " + quad.toString());
 				}
-				if (numTriples++ > 100){
-					//LinkLibrary.serialize("/home/bakerally/Downloads/testlinks/");
+				System.out.println();
+				numTriples++;
+				Runtime.getRuntime().exec("echo "+numTriples+" > /home/bakerally/Downloads/testlinks/counter");
+				/*if (numTriples++ > 10000){
+					LinkLibrary.serialize("/home/bakerally/Downloads/testlinks/");
 
 					System.out.println();
 					System.out.println("###########################Triples##################");
@@ -178,13 +180,15 @@ public class RDFProcessor {
 						System.out.println(key+ " "+linkTable.get(key).size());
 					}
 					break;
-				}
+				}*/
+
 			}
 			LinkLibrary.serialize("/home/bakerally/Downloads/testlinks/");
 			System.out.println("RDF Type Triples:"+counterRDFType);
 		} catch (final Throwable t) {
 			this.logger.info("Catching throwable in the loop", t);
 		}
+
 		try {
 //			this.logger.info("1");
 			this.loader.close();

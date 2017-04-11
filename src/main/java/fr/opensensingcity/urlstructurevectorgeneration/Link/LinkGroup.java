@@ -15,7 +15,7 @@ public class LinkGroup {
     int numSub;
     int numObj;
     int numPred;
-    List<Link> links;
+    List<String> links;
 
     public LinkGroup(){
         links = new ArrayList<>();
@@ -62,8 +62,9 @@ public class LinkGroup {
     }
 
     public void addLink(String linkStr, Types.Role role){
-        Link link = LinkFactory.createLink(linkStr,role);
-        links.add(link);
+        if (!links.contains(linkStr)){
+            links.add(linkStr);
+        }
         if (role == Types.Role.Subject){
             numSub++;
         }
@@ -75,11 +76,19 @@ public class LinkGroup {
         }
     }
 
+    public List<String> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<String> links) {
+        this.links = links;
+    }
+
     void serialize(String directory) throws FileNotFoundException, UnsupportedEncodingException {
         String fileName = directory + id;
         PrintWriter writer = new PrintWriter(fileName, "UTF-8");
-        for (Link link:links){
-            writer.println(link.getLink().toString());
+        for (String link:links){
+            writer.println(link);
         }
         writer.close();
     }

@@ -12,6 +12,7 @@ import java.util.Map;
 public  class LinkLibrary {
     static Map<String,LinkGroup> linkGroupMaps = new HashMap<>();
     public static void addLink(String link, Types.Role role){
+        System.out.println("Link:"+link);
         Link lnk = LinkFactory.createLink(link,role);
         String key = lnk.toString();
         if (linkGroupMaps.containsKey(key)){
@@ -30,11 +31,12 @@ public  class LinkLibrary {
 
         for (String linkGroupKey:linkGroupMaps.keySet()){
             LinkGroup linkGroup = linkGroupMaps.get(linkGroupKey);
-            Link sampleLink = linkGroup.getLinks().get(0);
+            Link sampleLink = LinkFactory.createLink(linkGroup.getLinks().get(0), Types.Role.Predicate);
             String line = "";
             line = line  + linkGroup.getId() + ",";
             line = line  + sampleLink.getNamespace() + ",";
             line = line  + sampleLink.getSeparator() + ",";
+            line = line  + sampleLink.getSeparatorType() + ",";
             line = line  + sampleLink.getQueryParamTemplate() + ",";
             line = line  + linkGroup.getNumSub() + ",";
             line = line  + linkGroup.getNumPred() + ",";

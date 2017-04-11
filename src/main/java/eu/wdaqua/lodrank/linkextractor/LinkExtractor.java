@@ -7,6 +7,8 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
+import fr.opensensingcity.urlstructurevectorgeneration.Link.LinkLibrary;
+import fr.opensensingcity.urlstructurevectorgeneration.Link.Types;
 import org.apache.jena.graph.Node;
 import org.apache.jena.graph.Triple;
 import org.apache.jena.sparql.core.Quad;
@@ -207,18 +209,33 @@ public class LinkExtractor {
 			String predicateIRI = triple.getPredicate().toString();
 			String objectIRI = triple.getObject().toString();
 
-			//System.out.println("Triple:"+subjectIRI+" "+predicateIRI+" "+objectIRI);
+			System.out.println("Triple:"+subjectIRI+" "+predicateIRI+" "+objectIRI);
 
 			links.add(0,subjectIRI);
 			links.add(1,predicateIRI);
 			links.add(2,objectIRI);
 
 
+			if (isValid(subjectIRI)){
+				LinkLibrary.addLink(subjectIRI, Types.Role.Subject);
+			}
+			if (isValid(predicateIRI)){
+				LinkLibrary.addLink(predicateIRI, Types.Role.Predicate);
+			}
+			if (isValid(objectIRI)){
+				LinkLibrary.addLink(objectIRI, Types.Role.Object);
+			}
+
 
 		} else {
 			this.logger.warn("Could not obtain dataset for triple. No links will be extracted.");
 		}
 		return links;
+	}
+
+	boolean isValid(String url){
+		String regex = "^(https?|ftp|file|mailto)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+		return url.matches(regex);
 	}
 
 	protected Collection<String> addLinkIfNotNull(final Collection<String> list, final String link) {
