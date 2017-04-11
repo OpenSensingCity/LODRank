@@ -44,7 +44,7 @@ public  class LinkLibrary {
             //System.out.println(line);
             writer.println(line);
 
-            linkGroup.serialize(directory);
+            //linkGroup.serialize(directory);
         }
         writer.close();
     }
