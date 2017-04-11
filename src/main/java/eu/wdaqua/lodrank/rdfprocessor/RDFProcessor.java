@@ -188,7 +188,7 @@ public class RDFProcessor {
 				}*/
 
 			}
-			//LinkLibrary.serialize("../analysisfiles/");
+			LinkLibrary.serialize("../analysisfiles/");
 			RepresentationAnalyser.serialize("../analysisfiles/");
 			System.out.println("RDF Type Triples:"+counterRDFType);
 			Utils.echoToFile(numTriples,"../analysisfiles/totalTriples");

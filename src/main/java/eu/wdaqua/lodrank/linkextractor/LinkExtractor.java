@@ -212,7 +212,7 @@ public class LinkExtractor {
 			links.add(2,objectIRI);
 
 
-			/*if (isValid(subjectIRI)){
+			if (isValid(subjectIRI)){
 				LinkLibrary.addLink(subjectIRI, Types.Role.Subject);
 			}
 			if (isValid(predicateIRI)){
@@ -220,7 +220,7 @@ public class LinkExtractor {
 			}
 			if (isValid(objectIRI)){
 				LinkLibrary.addLink(objectIRI, Types.Role.Object);
-			}*/
+			}
 
 
 		} else {

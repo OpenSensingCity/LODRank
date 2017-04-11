@@ -44,6 +44,10 @@ public class Types {
             //check if data is an alphanumeric
             if (StringUtils.isAlphanumeric(data)){
                 return DataType.alphanumeric;
+            } else {
+                if (StringUtils.isAlphanumeric(data.replace("-","").replace("_",""))){
+                    return DataType.alphanumeric;
+                }
             }
         }
         return DataType.nul;
