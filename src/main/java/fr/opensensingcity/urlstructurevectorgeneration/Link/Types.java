@@ -24,7 +24,7 @@ public class Types {
 
             if (data.contains(".")){
                 String extPart = data.substring(data.indexOf("."),data.length());
-                if (extPart.matches(".*\\d+.*")){
+                if (extPart.matches("\\.[1-9]+")){
                     return DataType.alphanumeric;
                 } else {
                     return DataType.filename;

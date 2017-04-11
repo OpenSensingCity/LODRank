@@ -11,26 +11,26 @@ import java.net.URISyntaxException;
  */
 public class Main {
     public static void main(String [] args)  {
-        String link = "http://bibliographica.org/entry/BB2682246?a=1&b=2";
+        String link = "http://bibliographica.org/entry/BB2682246.n3";
+
+
+
+        Link lnk = LinkFactory.createLink(link, Types.Role.Subject);
+        //System.out.println(lnk.getSeparatorType());
+        System.out.println(lnk.toString());
+
+
 
         //LinkLibrary.addLink(link, Types.Role.Subject);
         //LinkLibrary.serialize("/home/bakerally/Downloads/testlinks/");
-        String cmdStr = "echo "+1000+" > /home  /bakerally/Downloads/testlinks/counter";
 
-
+        /*String cmdStr = "echo "+1000+" > /home/bakerally/counter";
+        String [] commands = { "bash", "-c", cmdStr };
         try {
-            Process output = null;
-            try {
-                output = Runtime.getRuntime().exec(cmdStr);
-                output.waitFor();
-                System.out.println(output.exitValue());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            output.waitFor();
-        } catch (InterruptedException e) {
+            Runtime.getRuntime().exec(commands);
+        } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 }

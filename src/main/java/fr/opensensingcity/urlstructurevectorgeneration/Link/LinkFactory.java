@@ -26,11 +26,12 @@ public class LinkFactory {
             } else {
                 lnk.setSeparator("/");
                 namespace = link.substring(0,link.lastIndexOf("/")+1);
+                String afterSep;
                 if (uri.getRawQuery()==null){
-                    String afterSep = link.substring(link.lastIndexOf("/")+1,link.length());
+                    afterSep = link.substring(link.lastIndexOf("/")+1,link.length());
                     lnk.setSeparatorType(Types.getType(afterSep));
                 } else {
-                    String afterSep = link.substring(link.lastIndexOf("/"),link.lastIndexOf("?"));
+                    afterSep = link.substring(link.lastIndexOf("/")+1,link.lastIndexOf("?"));
                     lnk.setSeparatorType(Types.getType(afterSep));
                 }
             }

@@ -201,15 +201,11 @@ public class LinkExtractor {
 		}*/
 		if (getDataset() != null) {
 
-			/*links = addLinkIfNotNull(links, getLinkFromRole(Role.SUBJECT, triple));
-			links = addLinkIfNotNull(links, getLinkFromRole(Role.PREDICATE, triple));
-			links = addLinkIfNotNull(links, getLinkFromRole(Role.OBJECT, triple));*/
-
 			String subjectIRI = triple.getSubject().toString();
 			String predicateIRI = triple.getPredicate().toString();
 			String objectIRI = triple.getObject().toString();
 
-			System.out.println("Triple:"+subjectIRI+" "+predicateIRI+" "+objectIRI);
+			//System.out.println("Triple:"+subjectIRI+" "+predicateIRI+" "+objectIRI);
 
 			links.add(0,subjectIRI);
 			links.add(1,predicateIRI);

@@ -7,11 +7,9 @@ import java.net.URL;
 import java.util.*;
 import java.util.Map.Entry;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
-import fr.opensensingcity.urlstructurevectorgeneration.Link.Link;
-import fr.opensensingcity.urlstructurevectorgeneration.Link.LinkFactory;
-import fr.opensensingcity.urlstructurevectorgeneration.Link.LinkLibrary;
-import fr.opensensingcity.urlstructurevectorgeneration.Link.Types;
+import fr.opensensingcity.Utils;
+import fr.opensensingcity.representationanalysis.RepresentationAnalyser;
+import fr.opensensingcity.urlstructurevectorgeneration.Link.*;
 import org.apache.jena.graph.Triple;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.sparql.core.Quad;
@@ -142,13 +140,20 @@ public class RDFProcessor {
 					this.logger.debug("Getting links for quad: " + quad.toString());
 					this.linkExtractor.setQuad(quad);
 
+					System.out.println("Quad:"+quad.getGraph().toString());
+
+					RepresentationAnalyser.processQuad(quad);
+
+
+
+
+
 					final Entry<String, Collection<String>> entry = this.linkExtractor.getLinks();
 					if (entry != null) {
 						this.linkWriter.addLinks(entry.getKey(), entry.getValue());
 						counterRDFType++;
 
 						Collection<String> links = entry.getValue();
-
 
 						String subjectIRI = links.iterator().next();
 						if (subjectIRI != null){
@@ -170,7 +175,7 @@ public class RDFProcessor {
 				}
 				System.out.println();
 				numTriples++;
-				Runtime.getRuntime().exec("echo "+numTriples+" > /home/bakerally/Downloads/testlinks/counter");
+				Utils.echoToFile(numTriples,"../analysisfiles/counter");
 				/*if (numTriples++ > 10000){
 					LinkLibrary.serialize("/home/bakerally/Downloads/testlinks/");
 
@@ -183,8 +188,10 @@ public class RDFProcessor {
 				}*/
 
 			}
-			LinkLibrary.serialize("/home/bakerally/Downloads/testlinks/");
+			LinkLibrary.serialize("../analysisfiles/");
+			RepresentationAnalyser.serialize("../analysisfiles/");
 			System.out.println("RDF Type Triples:"+counterRDFType);
+			Utils.echoToFile(numTriples,"../analysisfiles/totalTriples");
 		} catch (final Throwable t) {
 			this.logger.info("Catching throwable in the loop", t);
 		}

@@ -12,7 +12,6 @@ import java.util.Map;
 public  class LinkLibrary {
     static Map<String,LinkGroup> linkGroupMaps = new HashMap<>();
     public static void addLink(String link, Types.Role role){
-        System.out.println("Link:"+link);
         Link lnk = LinkFactory.createLink(link,role);
         String key = lnk.toString();
         if (linkGroupMaps.containsKey(key)){
@@ -40,7 +39,7 @@ public  class LinkLibrary {
             line = line  + sampleLink.getQueryParamTemplate() + ",";
             line = line  + linkGroup.getNumSub() + ",";
             line = line  + linkGroup.getNumPred() + ",";
-            line = line  + linkGroup.getNumObj() + ",";
+            line = line  + linkGroup.getNumObj() ;
             //write to first file here
             //System.out.println(line);
             writer.println(line);
