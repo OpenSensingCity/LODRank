@@ -67,7 +67,11 @@ public class RDFRepSummary {
     public String serialize(){
         String line = "";
 
-        /*System.out.println("extSTriples:"+extSTriples);
+        /*System.out.println("ATriples:"+aTriples);
+        System.out.println("STriples:"+sTriples);
+        System.out.println("OTriples:"+oTriples);
+        System.out.println("GTriples:"+gTriples);
+        System.out.println("extSTriples:"+extSTriples);
         System.out.println("extOTriples:"+extOTriples);
         System.out.println("extGTriples:"+extGTriples);*/
         line = graphIRI + "," + aTriples + "," + sTriples + "," + oTriples + "," + gTriples + "," + extSTriples

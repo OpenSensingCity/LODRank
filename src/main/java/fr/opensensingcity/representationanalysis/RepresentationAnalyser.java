@@ -20,11 +20,10 @@ public class RepresentationAnalyser {
         String graphIRI = quad.getGraph().toString();
         if (!rdfGraphs.containsKey(graphIRI)){
             currentRep = new RDFRepSummary(graphIRI);
-        } else {
-            currentRep = rdfGraphs.get(graphIRI);
+            rdfGraphs.put(graphIRI,currentRep);
         }
-        currentRep.processTriple(quad.asTriple());
-        rdfGraphs.put(graphIRI,currentRep);
+        rdfGraphs.get(graphIRI).processTriple(quad.asTriple());
+
     }
 
     public static void serialize(String directory) throws FileNotFoundException, UnsupportedEncodingException {
