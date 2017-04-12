@@ -137,10 +137,10 @@ public class RDFProcessor {
 			while (this.loader.hasNext()) {
 				final Quad quad = (Quad) this.loader.next();
 				try {
-					this.logger.debug("Getting links for quad: " + quad.toString());
+					//this.logger.debug("Getting links for quad: " + quad.toString());
 					this.linkExtractor.setQuad(quad);
 
-					System.out.println("Quad:"+quad.getGraph().toString());
+					//System.out.println("Quad:"+quad.getGraph().toString());
 
 					RepresentationAnalyser.processQuad(quad);
 
@@ -173,7 +173,7 @@ public class RDFProcessor {
 				} catch (final InvalidResourceException e) {
 					this.logger.debug("Invalid resource when reading Quad " + quad.toString());
 				}
-				System.out.println();
+				System.out.println("NumTriples:"+(numTriples+1));
 				numTriples++;
 				Utils.echoToFile(numTriples,"../analysisfiles/counter");
 				/*if (numTriples++ > 10000){
