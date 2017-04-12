@@ -31,4 +31,13 @@ public class Utils {
         }
         return par1;
     }
+
+    public static boolean isValidURI(String uri){
+        try {
+            URI url = URI.create(uri);
+            return true;
+        } catch (Exception e1) {
+            return false;
+        }
+    }
 }

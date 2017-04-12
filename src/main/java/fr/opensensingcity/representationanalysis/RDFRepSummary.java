@@ -45,12 +45,16 @@ public class RDFRepSummary {
         String subject = triple.getSubject().toString();
         String object = triple.getObject().toString();
 
+
+
+
+
         boolean occurs = false;
-        if (subject.equals(graphIRI)){
+        if ( Utils.isValidURI(subject) && subject.equals(graphIRI)){
             sTriples++;
             occurs = true;
         }
-        if (object.equals(graphIRI)){
+        if (Utils.isValidURI(object) && object.equals(graphIRI)){
             oTriples++;
             occurs = true;
         }
@@ -63,11 +67,11 @@ public class RDFRepSummary {
         //if graphIRI contains a file extension
         if (hasExt){
             occurs = false;
-            if (subject.equals(partGraphIRI)){
+            if ( Utils.isValidURI(subject) && subject.equals(partGraphIRI)){
                 extSTriples++;
                 occurs = true;
             }
-            if (object.equals(partGraphIRI)){
+            if (Utils.isValidURI(object) && object.equals(partGraphIRI)){
                 extOTriples++;
                 occurs = true;
             }
@@ -79,11 +83,11 @@ public class RDFRepSummary {
 
         //checking localname only
         occurs=false;
-        if (Utils.getResource(subject).equals(Utils.getResource(graphIRI))){
+        if (Utils.isValidURI(subject) && Utils.getResource(subject).equals(Utils.getResource(graphIRI))){
             lnSTriples++;
             occurs = true;
         }
-        if (Utils.getResource(object).equals(Utils.getResource(graphIRI))){
+        if (Utils.isValidURI(object) && Utils.getResource(object).equals(Utils.getResource(graphIRI))){
             lnOTriples++;
             occurs = true;
         }
@@ -94,13 +98,13 @@ public class RDFRepSummary {
 
         //checking localname & scheme://Host only
         occurs = false;
-        if (Utils.getHostPart(graphIRI).equals(Utils.getHostPart(subject))){
+        if ( Utils.isValidURI(subject) && Utils.getHostPart(graphIRI).equals(Utils.getHostPart(subject))){
             if (Utils.getResource(subject).equals(Utils.getResource(graphIRI))){
                 lnPSTriples++;
                 occurs = true;
             }
         }
-        if (Utils.getHostPart(graphIRI).equals(Utils.getHostPart(object))){
+        if (Utils.isValidURI(object) && Utils.getHostPart(graphIRI).equals(Utils.getHostPart(object))){
             if (Utils.getResource(object).equals(Utils.getResource(graphIRI))){
                 lnPOTriples++;
                 occurs = true;
@@ -116,7 +120,8 @@ public class RDFRepSummary {
         String subjectResourceName = Utils.getResource(subject);
         String objectResourceName = Utils.getResource(object);
         String graphResourceName = Utils.getResource(graphIRI);
-        if (subject.equals(graphIRI) && graphResourceName.equals(objectResourceName) || graphResourceName.equals(subjectResourceName) && object.equals(graphIRI)){
+        if ( Utils.isValidURI(subject) && Utils.isValidURI(object) && (subject.equals(graphIRI) &&
+                graphResourceName.equals(objectResourceName) || graphResourceName.equals(subjectResourceName) && object.equals(graphIRI))){
             linkTriple++;
         }
 

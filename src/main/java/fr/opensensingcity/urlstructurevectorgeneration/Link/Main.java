@@ -32,6 +32,7 @@ public class Main {
         System.out.println(Utils.getHostPart("http://dbpedia.org/data2/yago/DutchMuayThaiPractitioners.rdf"));
 
 
+
         //LinkLibrary.addLink(link, Types.Role.Subject);
         //LinkLibrary.serialize("/home/bakerally/Downloads/testlinks/");
 
