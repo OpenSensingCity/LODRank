@@ -12,7 +12,7 @@ import java.net.URL;
  */
 public class Types {
     public enum Role {Subject,Predicate,Object}
-    public enum DataType { alpha, numeric, alphanumeric, date, uri, nul,filename}
+    public enum DataType { alpha, numeric, string, date, uri, nul,filename}
 
     public static DataType getType(String data){
         //check if string is a URL first
@@ -25,7 +25,7 @@ public class Types {
             if (data.contains(".")){
                 String extPart = data.substring(data.indexOf("."),data.length());
                 if (extPart.matches("\\.[1-9]+")){
-                    return DataType.alphanumeric;
+                    return DataType.string;
                 } else {
                     return DataType.filename;
                 }
@@ -36,19 +36,22 @@ public class Types {
                 return DataType.numeric;
             }
 
-            //check if data is a alpha
+            /*//check if data is a alpha
             if (StringUtils.isAlpha(data)){
                 return DataType.alpha;
-            }
+            }*/
 
             //check if data is an alphanumeric
             if (StringUtils.isAlphanumeric(data)){
-                return DataType.alphanumeric;
+                return DataType.string;
             } else {
                 if (StringUtils.isAlphanumeric(data.replace("-","").replace("_",""))){
-                    return DataType.alphanumeric;
+                    return DataType.string;
                 }
             }
+        }
+        if (data.length() > 0){
+            return DataType.string;
         }
         return DataType.nul;
     }

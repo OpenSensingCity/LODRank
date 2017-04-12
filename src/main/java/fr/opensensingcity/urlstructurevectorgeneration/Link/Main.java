@@ -19,19 +19,16 @@ import java.net.URISyntaxException;
  */
 public class Main {
     public static void main(String [] args)  {
-        String link = "http://liblists.sussex.ac.uk/items/B4FF9586-0C16-0852-8350-5BE2EEAF15CF#test";
 
+        /*String link = "http://liblists.sussex.ac.uk/items/B4FF9586-0C16-0852-8350-5BE2EEAF15CF#test";
         System.out.println("Types:"+Types.getType("B4FF9586-0C16-0852-8350-5BE2EEAF15CF"));
-
-
         System.out.println("AlphaNumeric:"+ StringUtils.isAlphanumeric("B4FF9586-0C16-0852-8350-5BE2EEAF15CF"));
         Link lnk = LinkFactory.createLink(link, Types.Role.Subject);
         System.out.println(lnk.getSeparatorType());
         System.out.println(lnk.toString());
+        System.out.println(Utils.getHostPart("http://dbpedia.org/data2/yago/DutchMuayThaiPractitioners.rdf"));*/
 
-        System.out.println(Utils.getHostPart("http://dbpedia.org/data2/yago/DutchMuayThaiPractitioners.rdf"));
-
-
+        System.out.println(Types.getType("0-4-0+0-4-0Locomotives"));
 
         //LinkLibrary.addLink(link, Types.Role.Subject);
         //LinkLibrary.serialize("/home/bakerally/Downloads/testlinks/");
