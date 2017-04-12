@@ -171,9 +171,9 @@ public class RDFProcessor {
 						}*/
 					}
 				} catch (final InvalidResourceException e) {
+					System.out.println("NumTriples:"+(numTriples+1));
 					this.logger.debug("Invalid resource when reading Quad " + quad.toString());
 				}
-				System.out.println("NumTriples:"+(numTriples+1));
 				numTriples++;
 				Utils.echoToFile(numTriples,"../analysisfiles/counter");
 				/*if (numTriples++ > 10000){
@@ -188,8 +188,6 @@ public class RDFProcessor {
 				}*/
 
 			}
-			LinkLibrary.serialize("../analysisfiles/");
-			RepresentationAnalyser.serialize("../analysisfiles/");
 			System.out.println("RDF Type Triples:"+counterRDFType);
 			Utils.echoToFile(numTriples,"../analysisfiles/totalTriples");
 		} catch (final Throwable t) {

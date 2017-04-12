@@ -4,10 +4,14 @@
 package eu.wdaqua.lodrank;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
+import fr.opensensingcity.representationanalysis.RepresentationAnalyser;
+import fr.opensensingcity.urlstructurevectorgeneration.Link.LinkLibrary;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.ex.ConfigurationException;
@@ -251,6 +255,17 @@ public class LODRank {
 
 		this.logger.info("Starting process...");
 		listProcessor.run();
+
+		try {
+			LinkLibrary.serialize("../analysisfiles/");
+			RepresentationAnalyser.serialize("../analysisfiles/");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+
+
 		this.logger.info("Process finished.");
 	}
 
