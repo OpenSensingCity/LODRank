@@ -1,6 +1,7 @@
 package fr.opensensingcity.urlstructurevectorgeneration.Link;
 
 import eu.wdaqua.lodrank.loader.QuadLoader;
+import fr.opensensingcity.Utils;
 import fr.opensensingcity.representationanalysis.RepresentationAnalyser;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.graph.Node;
@@ -18,7 +19,7 @@ import java.net.URISyntaxException;
  */
 public class Main {
     public static void main(String [] args)  {
-        String link = "http://liblists.sussex.ac.uk/items/B4FF9586-0C16-0852-8350-5BE2EEAF15CF";
+        String link = "http://liblists.sussex.ac.uk/items/B4FF9586-0C16-0852-8350-5BE2EEAF15CF#test";
 
         System.out.println("Types:"+Types.getType("B4FF9586-0C16-0852-8350-5BE2EEAF15CF"));
 
@@ -28,6 +29,7 @@ public class Main {
         System.out.println(lnk.getSeparatorType());
         System.out.println(lnk.toString());
 
+        System.out.println(Utils.getHostPart("http://dbpedia.org/data2/yago/DutchMuayThaiPractitioners.rdf"));
 
 
         //LinkLibrary.addLink(link, Types.Role.Subject);
@@ -53,4 +55,7 @@ public class Main {
         System.out.println(RepresentationAnalyser.getString());*/
 
     }
+
+
+
 }

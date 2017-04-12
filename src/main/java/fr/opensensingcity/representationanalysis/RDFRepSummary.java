@@ -1,6 +1,9 @@
 package fr.opensensingcity.representationanalysis;
 
+import fr.opensensingcity.Utils;
 import org.apache.jena.graph.Triple;
+
+import java.net.URI;
 
 /**
  * Created by bakerally on 4/11/17.
@@ -17,6 +20,18 @@ public class RDFRepSummary {
     int extSTriples = 0;
     int extOTriples = 0;
     int extGTriples = 0;
+
+    int lnPOTriples =0;
+    int lnPGTriples = 0 ;
+    int lnPSTriples = 0;
+
+    int lnOTriples =0;
+    int lnGTriples = 0 ;
+    int lnSTriples = 0;
+
+    int linkTriple = 0;
+
+
 
     public RDFRepSummary(String graphIRI) {
         this.graphIRI = graphIRI;
@@ -62,6 +77,49 @@ public class RDFRepSummary {
             }
         }
 
+        //checking localname only
+        occurs=false;
+        if (Utils.getResource(subject).equals(Utils.getResource(graphIRI))){
+            lnSTriples++;
+            occurs = true;
+        }
+        if (Utils.getResource(object).equals(Utils.getResource(graphIRI))){
+            lnOTriples++;
+            occurs = true;
+        }
+        if (!occurs){
+            //GT Triples
+            lnGTriples++;
+        }
+
+        //checking localname & scheme://Host only
+        occurs = false;
+        if (Utils.getHostPart(graphIRI).equals(Utils.getHostPart(subject))){
+            if (Utils.getResource(subject).equals(Utils.getResource(graphIRI))){
+                lnPSTriples++;
+                occurs = true;
+            }
+        }
+        if (Utils.getHostPart(graphIRI).equals(Utils.getHostPart(object))){
+            if (Utils.getResource(object).equals(Utils.getResource(graphIRI))){
+                lnPOTriples++;
+                occurs = true;
+            }
+        }
+        if (!occurs){
+            //GT Triples
+            lnPGTriples++;
+        }
+
+
+        //check link triple
+        String subjectResourceName = Utils.getResource(subject);
+        String objectResourceName = Utils.getResource(object);
+        String graphResourceName = Utils.getResource(graphIRI);
+        if (subject.equals(graphIRI) && graphResourceName.equals(objectResourceName) || graphResourceName.equals(subjectResourceName) && object.equals(graphIRI)){
+            linkTriple++;
+        }
+
     }
 
     public String serialize(){
@@ -74,9 +132,9 @@ public class RDFRepSummary {
         System.out.println("extSTriples:"+extSTriples);
         System.out.println("extOTriples:"+extOTriples);
         System.out.println("extGTriples:"+extGTriples);*/
-        line = graphIRI + "," + aTriples + "," + sTriples + "," + oTriples + "," + gTriples + "," + extSTriples
-        + ","+ extOTriples + "," + extGTriples;
+        line = graphIRI.replace(",","") + "," + aTriples + "," + sTriples + "," + oTriples + "," + gTriples + "," + extSTriples
+        + ","+ extOTriples + "," + extGTriples + "," + lnPSTriples + "," + lnPOTriples + "," + lnPGTriples + "," +lnSTriples
+                + "," + lnOTriples + "," + lnGTriples + ","+ linkTriple;
         return line;
     }
-
 }
