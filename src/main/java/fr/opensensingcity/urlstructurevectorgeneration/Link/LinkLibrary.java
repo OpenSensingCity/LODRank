@@ -20,6 +20,7 @@ public  class LinkLibrary {
             LinkGroup linkGroup = new LinkGroup();
             linkGroup.setId(linkGroupMaps.keySet().size()+1);
             linkGroup.addLink(link,role);
+            linkGroup.setSampleLink(LinkFactory.createLink(link,role));
             linkGroupMaps.put(lnk.toString(),linkGroup);
         }
     }
@@ -30,7 +31,7 @@ public  class LinkLibrary {
 
         for (String linkGroupKey:linkGroupMaps.keySet()){
             LinkGroup linkGroup = linkGroupMaps.get(linkGroupKey);
-            Link sampleLink = LinkFactory.createLink(linkGroup.getLinks().get(0), Types.Role.Predicate);
+            Link sampleLink = linkGroup.getSampleLink();
             String line = "";
             line = line  + linkGroup.getId() + ",";
             line = line  + sampleLink.getNamespace() + ",";

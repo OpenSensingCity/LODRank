@@ -16,6 +16,7 @@ public class LinkGroup {
     int numObj;
     int numPred;
     List<String> links;
+    Link sampleLink;
 
     public LinkGroup(){
         links = new ArrayList<>();
@@ -62,7 +63,7 @@ public class LinkGroup {
     }
 
     public void addLink(String linkStr, Types.Role role){
-        if (!links.contains(linkStr)){
+        if (links.contains(linkStr)){
             //links.add(linkStr);
         }
         if (role == Types.Role.Subject){
@@ -93,4 +94,11 @@ public class LinkGroup {
         writer.close();
     }
 
+    public Link getSampleLink() {
+        return sampleLink;
+    }
+
+    public void setSampleLink(Link sampleLink) {
+        this.sampleLink = sampleLink;
+    }
 }
