@@ -257,7 +257,7 @@ public class LODRank {
 		listProcessor.run();
 
 		try {
-			//LinkLibrary.serialize("../analysisfiles/");
+			LinkLibrary.serialize("../analysisfiles/");
 			RepresentationAnalyser.serialize("../analysisfiles/");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

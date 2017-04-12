@@ -34,13 +34,14 @@ public  class LinkLibrary {
             Link sampleLink = linkGroup.getSampleLink();
             String line = "";
             line = line  + linkGroup.getId() + ",";
-            line = line  + sampleLink.getNamespace() + ",";
+            line = line  + sampleLink.getNamespace().replace(",","") + ",";
             line = line  + sampleLink.getSeparator() + ",";
             line = line  + sampleLink.getSeparatorType() + ",";
             line = line  + sampleLink.getQueryParamTemplate() + ",";
             line = line  + linkGroup.getNumSub() + ",";
             line = line  + linkGroup.getNumPred() + ",";
-            line = line  + linkGroup.getNumObj() ;
+            line = line  + linkGroup.getNumObj() + ",";
+            line = line + linkGroup.links.get(0);
             //write to first file here
             //System.out.println(line);
             writer.println(line);

@@ -63,8 +63,8 @@ public class LinkGroup {
     }
 
     public void addLink(String linkStr, Types.Role role){
-        if (links.contains(linkStr)){
-            //links.add(linkStr);
+        if (links.size() < 1){
+            links.add(linkStr);
         }
         if (role == Types.Role.Subject){
             numSub++;
