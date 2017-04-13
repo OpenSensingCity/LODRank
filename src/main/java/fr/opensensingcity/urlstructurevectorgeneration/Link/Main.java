@@ -28,7 +28,7 @@ public class Main {
         System.out.println(lnk.toString());
         System.out.println(Utils.getHostPart("http://dbpedia.org/data2/yago/DutchMuayThaiPractitioners.rdf"));*/
 
-        System.out.println(Types.getType("0-4-0+0-4-0Locomotives"));
+        System.out.println(LinkFactory.createLink("http://semanticweb.org/index.php?title=Special:ExportRDF/Property:PDFURL&xmlmime=rdf",Types.Role.Subject));
 
         //LinkLibrary.addLink(link, Types.Role.Subject);
         //LinkLibrary.serialize("/home/bakerally/Downloads/testlinks/");

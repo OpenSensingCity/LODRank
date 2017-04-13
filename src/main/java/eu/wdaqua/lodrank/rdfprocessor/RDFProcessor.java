@@ -175,7 +175,7 @@ public class RDFProcessor {
 					this.logger.debug("Invalid resource when reading Quad " + quad.toString());
 				}
 				numTriples++;
-				System.out.println("NumTriples:"+(numTriples+1));
+				//System.out.println("NumTriples:"+(numTriples+1));
 				Utils.echoToFile(numTriples,"../analysisfiles/counter");
 				/*if (numTriples++ > 10000){
 					LinkLibrary.serialize("/home/bakerally/Downloads/testlinks/");

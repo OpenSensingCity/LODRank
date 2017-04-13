@@ -10,6 +10,7 @@ import java.net.URL;
  */
 public class LinkFactory {
     public static Link createLink(String link, Types.Role role)  {
+        //System.out.println("Link:"+link);
         URI uri = null;
         Link lnk;
         try {
@@ -31,7 +32,14 @@ public class LinkFactory {
                     afterSep = link.substring(link.lastIndexOf("/")+1,link.length());
                     lnk.setSeparatorType(Types.getType(afterSep));
                 } else {
-                    afterSep = link.substring(link.lastIndexOf("/")+1,link.lastIndexOf("?"));
+
+
+                    if (link.contains("?")){
+                        String part1 = link.substring(0,link.lastIndexOf("?"));
+                        afterSep = link.substring(part1.lastIndexOf("/")+1,part1.length());
+                    } else {
+                        afterSep = link.substring(link.lastIndexOf("/")+1,link.lastIndexOf("?"));
+                    }
                     lnk.setSeparatorType(Types.getType(afterSep));
                 }
             }
