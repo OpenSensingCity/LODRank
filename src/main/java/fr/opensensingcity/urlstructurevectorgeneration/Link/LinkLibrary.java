@@ -41,7 +41,7 @@ public  class LinkLibrary {
             line = line  + linkGroup.getNumSub() + ",";
             line = line  + linkGroup.getNumPred() + ",";
             line = line  + linkGroup.getNumObj() + ",";
-            line = line + linkGroup.links.get(0);
+            line = line + linkGroup.links.get(0).replace(",","");
             //write to first file here
             //System.out.println(line);
             writer.println(line);
