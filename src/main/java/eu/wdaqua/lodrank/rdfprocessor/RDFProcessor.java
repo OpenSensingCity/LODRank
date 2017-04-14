@@ -142,7 +142,11 @@ public class RDFProcessor {
 
 					//System.out.println("Quad:"+quad.getGraph().toString());
 
-					RepresentationAnalyser.processQuad(quad);
+					String predicateStr = quad.asTriple().getPredicate().toString().toLowerCase();
+					if (predicateStr.contains("primarytopic")){
+						RepresentationAnalyser.processQuad(quad);
+					}
+
 
 
 
