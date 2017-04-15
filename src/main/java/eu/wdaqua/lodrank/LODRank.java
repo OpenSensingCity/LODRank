@@ -10,6 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
+import fr.opensensingcity.Scheduler.Scheduler;
 import fr.opensensingcity.representationanalysis.RepresentationAnalyser;
 import fr.opensensingcity.urlstructurevectorgeneration.Link.LinkLibrary;
 import org.apache.commons.configuration2.Configuration;
@@ -256,15 +257,18 @@ public class LODRank {
 		this.logger.info("Starting process...");
 		listProcessor.run();
 
-		try {
+		/*try {
+
 			LinkLibrary.serialize("../analysisfiles/");
 			RepresentationAnalyser.serialize("../analysisfiles/");
+
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
-		}
-
+		}*/
+		Scheduler.printResources();
 
 		this.logger.info("Process finished.");
 	}

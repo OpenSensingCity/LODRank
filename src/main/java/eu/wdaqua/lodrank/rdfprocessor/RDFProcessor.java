@@ -7,8 +7,8 @@ import java.net.URL;
 import java.util.*;
 import java.util.Map.Entry;
 
+import fr.opensensingcity.Scheduler.Scheduler;
 import fr.opensensingcity.Utils;
-import fr.opensensingcity.representationanalysis.RepresentationAnalyser;
 import fr.opensensingcity.urlstructurevectorgeneration.Link.*;
 import org.apache.jena.graph.Triple;
 import org.apache.jena.riot.Lang;
@@ -142,11 +142,8 @@ public class RDFProcessor {
 
 					//System.out.println("Quad:"+quad.getGraph().toString());
 
-					RepresentationAnalyser.processQuad(quad);
-
-
-
-
+					//RepresentationAnalyser.processQuad(quad);
+					Scheduler.processQuad(quad);
 
 					final Entry<String, Collection<String>> entry = this.linkExtractor.getLinks();
 					if (entry != null) {
@@ -154,40 +151,16 @@ public class RDFProcessor {
 						counterRDFType++;
 
 						Collection<String> links = entry.getValue();
-
-						/*String subjectIRI = links.iterator().next();
-						if (subjectIRI != null){
-
-						}
-
-						String predicateIRI = links.iterator().next();
-						if (predicateIRI != null){
-
-						}
-
-						String objectIRI = links.iterator().next();
-						if (objectIRI != null){
-
-						}*/
 					}
 				} catch (final InvalidResourceException e) {
 
 					this.logger.debug("Invalid resource when reading Quad " + quad.toString());
 				}
 				numTriples++;
-				//System.out.println("NumTriples:"+(numTriples+1));
+				System.out.println("Triples processed:"+numTriples);
+				System.out.println("Resources added:"+Scheduler.numResouces);
+
 				Utils.echoToFile(numTriples,"../analysisfiles/counter");
-				/*if (numTriples++ > 10000){
-					LinkLibrary.serialize("/home/bakerally/Downloads/testlinks/");
-
-					System.out.println();
-					System.out.println("###########################Triples##################");
-					for (String key:linkTable.keySet()){
-						System.out.println(key+ " "+linkTable.get(key).size());
-					}
-					break;
-				}*/
-
 			}
 			System.out.println("RDF Type Triples:"+counterRDFType);
 			Utils.echoToFile(numTriples,"../analysisfiles/totalTriples");
