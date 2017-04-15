@@ -13,12 +13,25 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by bakerally on 3/31/17.
  */
 public class Main {
-    public static void main(String [] args)  {
+    public static void main(String [] args) throws IOException {
+
+
+        URL url = new URL("http://www.w3.org/2002/07/owl#Class");
+        String[] domainNameParts = url.getHost().split(".");
+        System.out.println(url.getHost().split(".").length);
 
         /*String link = "http://liblists.sussex.ac.uk/items/B4FF9586-0C16-0852-8350-5BE2EEAF15CF#test";
         System.out.println("Types:"+Types.getType("B4FF9586-0C16-0852-8350-5BE2EEAF15CF"));
@@ -28,7 +41,7 @@ public class Main {
         System.out.println(lnk.toString());
         System.out.println(Utils.getHostPart("http://dbpedia.org/data2/yago/DutchMuayThaiPractitioners.rdf"));*/
 
-        System.out.println(LinkFactory.createLink("http://semanticweb.org/index.php?title=Special:ExportRDF/Property:PDFURL&xmlmime=rdf",Types.Role.Subject));
+        //System.out.println(LinkFactory.createLink("http://semanticweb.org/index.php?title=Special:ExportRDF/Property:PDFURL&xmlmime=rdf",Types.Role.Subject));
 
         //LinkLibrary.addLink(link, Types.Role.Subject);
         //LinkLibrary.serialize("/home/bakerally/Downloads/testlinks/");

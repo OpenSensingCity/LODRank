@@ -159,7 +159,9 @@ public class RDFProcessor {
 				numTriples++;
 				System.out.println("Triples processed:"+numTriples);
 				System.out.println("Resources added:"+Scheduler.numResouces);
-
+				if (numTriples > 1000){
+					break;
+				}
 				Utils.echoToFile(numTriples,"../analysisfiles/counter");
 			}
 			System.out.println("RDF Type Triples:"+counterRDFType);

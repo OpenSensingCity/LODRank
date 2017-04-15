@@ -5,6 +5,7 @@ package eu.wdaqua.lodrank;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -133,7 +134,7 @@ public class LODRank {
 	@Parameter(names = { "-d", "--duplicates" }, description = "Allow to extract duplicate links. False by default.", arity = 1)
 	protected Boolean				pDuplicates						= null;
 
-	public static void main(final String[] args) throws SourceNotOpenableException, ConfigurationException, DestinationNotOpenableException {
+	public static void main(final String[] args) throws IOException, ConfigurationException {
 		final LODRank lodRank = new LODRank(args);
 		lodRank.run();
 	}
@@ -159,7 +160,7 @@ public class LODRank {
 		this.lang = RDFLanguages.nameToLang(getLang());
 	}
 
-	public void run() throws SourceNotOpenableException, DestinationNotOpenableException {
+	public void run() throws IOException {
 		System.out.println();
 		this.logger.debug("Creating URLProcessor");
 		final URLProcessor urlProcessor;
@@ -268,7 +269,7 @@ public class LODRank {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}*/
-		Scheduler.printResources();
+		Scheduler.serialize("../analysisfiles/");
 
 		this.logger.info("Process finished.");
 	}
