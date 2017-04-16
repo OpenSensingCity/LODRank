@@ -31,6 +31,7 @@ public class Scheduler {
             new ConcurrentHashMap<String,List<String>>();
     static Map <String,String> resourcesStatus = new HashMap<>();
 
+    public static int numQuads = 0;
     public static int numResouces = 0;
     public static int downloadFail;
     public static int loadFail;
@@ -92,7 +93,7 @@ public class Scheduler {
             List<String> rList = resources.get(cResource);
             Files.write(out,rList, Charset.defaultCharset());
 
-            writer.write(cResource + ","+code+","+rList.size() +"\n");
+            writer.write(cResource.replaceAll(",","") + ","+code+","+rList.size() +"\n");
             code++;
         }
         writer.close();

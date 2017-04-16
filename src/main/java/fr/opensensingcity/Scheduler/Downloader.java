@@ -6,4 +6,8 @@ package fr.opensensingcity.Scheduler;
 public class Downloader extends Thread {
     String pld;
 
+    public void run(){
+        
+    }
+
 }

@@ -130,7 +130,6 @@ public class RDFProcessor {
 		this.loader.open();
 
 		long counterRDFType = 0;
-		int numTriples = 0;
 		Map<String, List<Link>> linkTable = new HashMap<String, List<Link>>();
 
 		try {
@@ -156,16 +155,16 @@ public class RDFProcessor {
 
 					this.logger.debug("Invalid resource when reading Quad " + quad.toString());
 				}
-				numTriples++;
-				System.out.println("Triples processed:"+numTriples);
+				Scheduler.numQuads++;
+				System.out.println("Triples processed:"+Scheduler.numQuads);
 				System.out.println("Resources added:"+Scheduler.numResouces);
 				/*if (numTriples > 1000){
 					break;
 				}*/
-				Utils.echoToFile(numTriples,"../analysisfiles/counter");
+				Utils.echoToFile(Scheduler.numQuads,"../analysisfiles/counter");
 			}
 			System.out.println("RDF Type Triples:"+counterRDFType);
-			Utils.echoToFile(numTriples,"../analysisfiles/totalTriples");
+			Utils.echoToFile(Scheduler.numQuads,"../analysisfiles/totalTriples");
 		} catch (final Throwable t) {
 			this.logger.info("Catching throwable in the loop", t);
 		}
